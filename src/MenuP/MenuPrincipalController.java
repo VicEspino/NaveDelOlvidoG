@@ -89,7 +89,7 @@ public class MenuPrincipalController implements Initializable {
 
     @FXML
     private void btnSalir_OnAction(ActionEvent event) {
-        
+        //saldrá del del programa
         System.exit(0);
         
     }
