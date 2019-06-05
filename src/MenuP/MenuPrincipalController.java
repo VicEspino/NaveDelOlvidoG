@@ -7,6 +7,7 @@ package MenuP;
 
 import Logica.MeteoroClass;
 import Logica.RecursosGlobales;
+import com.jfoenix.controls.JFXSlider;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,7 +17,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.SwipeEvent;
+import javafx.scene.input.TouchEvent;
+import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 
 /**
@@ -35,18 +45,26 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private Button Salir;
     @FXML
-    private Circle circleMeteoro,meteoro;
+    private Circle circleMeteoro;
 
     MeteoroClass meteoroP;
     @FXML
     private AnchorPane fondo;
     
     Thread iniciadorLluvia;
+    @FXML
+    private JFXSlider deslizador;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+       RecursosGlobales.music = new AudioClip( this.getClass().getResource("/Recursos/Musica/angel.mp4").toString() );
+         RecursosGlobales.music.play();
+        deslizador.valueProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    RecursosGlobales.velocidadLluvia = (long) this.deslizador.getValue();
+                    
+        });
       iniciadorLluvia = new Thread(){
 
          //con clase anonimaa tira excepcion
@@ -93,5 +111,5 @@ public class MenuPrincipalController implements Initializable {
         System.exit(0);
         
     }
-    
+ 
 }

@@ -5,13 +5,15 @@
  */
 package Logica;
 
+import javafx.scene.media.AudioClip;
+
 /**
  *
  * @author VAPESIN
  */
 public class RecursosGlobales {
 
-
+    public static AudioClip music;
     public static boolean lluviaMeteoros = true; 
     public static double aumentoX= 3;
     public static double aumentoY= 3;
