@@ -21,7 +21,7 @@ public class main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("/MenuP/menuPrincipal.fxml"));
-        //ss
+        //ssaaasddssf
         primaryStage.setScene(new Scene(root,790,570));
         
         primaryStage.show();
