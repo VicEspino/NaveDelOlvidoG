@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="fondo" prefHeight="570.0" prefWidth="790.0" style="-fx-background-color: #086DA0;" styleClass="mainFxmlClass" stylesheets="@menuprincipal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuP.MenuPrincipalController">
+   <children>
+      <Label layoutX="28.0" layoutY="89.0" text="La nave del olvido UwU" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="48.0" />
+         </font></Label>
+      <AnchorPane fx:id="barraMover" prefHeight="27.0" prefWidth="790.0" style="-fx-background-color: #076899;" />
+      <Button fx:id="btnJugar" layoutX="547.0" layoutY="258.0" mnemonicParsing="false" onAction="#btnJugar_OnAction" prefHeight="67.0" prefWidth="164.0" text="Jugar" />
+      <Button fx:id="btnOpciones" layoutX="547.0" layoutY="352.0" mnemonicParsing="false" onAction="#btnOpciones_OnAction" prefHeight="67.0" prefWidth="164.0" text="Configuración" />
+      <Button fx:id="Salir" layoutX="547.0" layoutY="440.0" mnemonicParsing="false" onAction="#btnSalir_OnAction" prefHeight="67.0" prefWidth="164.0" text="Salir" />
+      <Circle fx:id="circleMeteoro" fill="#ff5e5eb2" layoutX="28.0" layoutY="549.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label layoutX="62.0" layoutY="507.0" prefHeight="41.0" prefWidth="254.0" text="By: Vic A. Espino" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="33.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
