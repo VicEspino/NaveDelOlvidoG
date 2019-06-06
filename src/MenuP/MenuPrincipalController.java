@@ -9,6 +9,7 @@ import ConfiguracionVentana.VentanaConfiguracionController;
 import Logica.MeteoroClass;
 import Logica.RecursosGlobales;
 import com.jfoenix.controls.JFXSlider;
+import java.io.File;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.net.URL;
@@ -62,26 +63,20 @@ public class MenuPrincipalController implements Initializable {
     
     Thread iniciadorLluvia;
     @FXML
-    private JFXSlider deslizador;
+    private JFXSlider deslizadorVelocidad;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 //       RecursosGlobales.music 
-    RecursosGlobales.music  = new AudioClip( 
-            this.getClass().getResource("/Recursos/Musica/angel.mp4").toString() );
-            //  RecursosGlobales.music.volumeProperty().set(new Double(0));
-
-        RecursosGlobales.music.play();
-       //  music.setVolume(0.0);
-         
-         
-        deslizador.valueProperty().addListener(
+   
+       
+        deslizadorVelocidad.valueProperty().addListener(
                 (observable, oldValue, newValue) -> {
-                    RecursosGlobales.velocidadLluvia = (long) this.deslizador.getValue();
+                    RecursosGlobales.velocidadLluvia = (long) this.deslizadorVelocidad.getValue();
                     
         });
       iniciadorLluvia = new Thread(){
-
+            
          //con clase anonimaa tira excepcion
            
          @Override
@@ -103,13 +98,14 @@ public class MenuPrincipalController implements Initializable {
       iniciadorLluvia.setDaemon(true);
       iniciadorLluvia.start();
       
+      RecursosGlobales.iniciarMusica("src/Recursos/Musica/angel.mp4");
+        
     }    
 
     @FXML
     private void btnJugar_OnAction(ActionEvent event) {
       
-        //meteoroP = 
-       
+      
        
       
        

@@ -5,7 +5,9 @@
  */
 package Logica;
 
-import javafx.scene.media.AudioClip;
+import java.io.File;
+import javafx.scene.media.Media;
+ import javafx.scene.media.MediaPlayer;
 
 /**
  *
@@ -13,7 +15,13 @@ import javafx.scene.media.AudioClip;
  */
 public class RecursosGlobales {
 
-    public static AudioClip music;
+    public static String path = "src/Recursos/Musica/angel.mp4";
+    public static File grafic ;
+    public static String rutaG;
+
+    public static Media media; 
+
+    public static MediaPlayer musiquita;
 
     public static boolean lluviaMeteoros = true; 
     public static double aumentoX= 3;
@@ -23,11 +31,15 @@ public class RecursosGlobales {
     public static double altoMenu=570;
     public static double volumenMusic = 100;
 
-    public RecursosGlobales(double f) {
-    
-    
-    }
-    
+   public static void iniciarMusica(String path){
+       grafic = new File(path);
+       rutaG = grafic.getAbsoluteFile().toString();
+       media = new Media(new File(path).toURI().toString());
+       
+       musiquita  = new MediaPlayer(media);
+       musiquita.play();
+
+   }
     
     
 }

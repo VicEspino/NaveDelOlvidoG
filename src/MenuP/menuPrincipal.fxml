@@ -23,6 +23,6 @@
             <Font name="Segoe UI" size="33.0" />
          </font>
       </Label>
-      <JFXSlider fx:id="deslizador" layoutX="342.0" layoutY="522.0" max="20.0" min="1.0" prefHeight="14.0" prefWidth="238.0" value="5.0" />
+      <JFXSlider fx:id="deslizadorVelocidad" layoutX="342.0" layoutY="522.0" max="20.0" min="1.0" prefHeight="14.0" prefWidth="238.0" value="5.0" />
    </children>
 </AnchorPane>

@@ -53,12 +53,7 @@ public class VentanaConfiguracionController extends AnchorPane{
         
          sliderMusica.valueProperty().addListener(
                (observable, oldValue, newValue) -> {
-        
-                       RecursosGlobales.music.volumeProperty().set(newValue.doubleValue()/100);
-                   //    RecursosGlobales.music.
-                       // RecursosGlobales.music.getVolume();
-
-                   //});
+                   RecursosGlobales.musiquita.volumeProperty().set(newValue.doubleValue()/100);
        } );
                        
     }
