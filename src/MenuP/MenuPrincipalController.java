@@ -5,10 +5,12 @@
  */
 package MenuP;
 
+import ConfiguracionVentana.VentanaConfiguracionController;
 import Logica.MeteoroClass;
 import Logica.RecursosGlobales;
 import com.jfoenix.controls.JFXSlider;
 import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -62,11 +64,17 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private JFXSlider deslizador;
     
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       RecursosGlobales.music = new AudioClip( this.getClass().getResource("/Recursos/Musica/angel.mp4").toString() );
-         RecursosGlobales.music.play();
+//       RecursosGlobales.music 
+    RecursosGlobales.music  = new AudioClip( 
+            this.getClass().getResource("/Recursos/Musica/angel.mp4").toString() );
+            //  RecursosGlobales.music.volumeProperty().set(new Double(0));
+
+        RecursosGlobales.music.play();
+       //  music.setVolume(0.0);
+         
+         
         deslizador.valueProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     RecursosGlobales.velocidadLluvia = (long) this.deslizador.getValue();
@@ -110,15 +118,38 @@ public class MenuPrincipalController implements Initializable {
 
     @FXML
     private void btnOpciones_OnAction(ActionEvent event) throws IOException {
+         Stage s = ( (Stage) ((Node)event.getSource()).getScene().getWindow() );
+
+               VentanaConfiguracionController ventana = new VentanaConfiguracionController(fondo);
         
-       /* Parent root = FXMLLoader.load(getClass().getResource("/ConfiguracionVentana/VentanaConfiguracion.fxml"));
-        
-        VBox v = new VBox();
-        v.getChildren().addAll(root,(Node) event.getSource()  );
-         Stage newStage = new Stage();
-        newStage = (Stage)( ((Node) (event.getSource() ) ).getScene().getWindow() );
-        newStage.setScene(new Scene(v));
-        */
+                ventana.setLayoutX(RecursosGlobales.largoMenu-10);
+                ventana.setLayoutY(RecursosGlobales.altoMenu/11);
+                fondo.getChildren().add(ventana);
+     new Thread(()->{                  
+             while(ventana.getLayoutX()>450){
+                  Platform.runLater(()->{
+              
+                      
+                    ventana.setLayoutX(ventana.getLayoutX()-10);
+
+
+
+                 });
+                  
+                try {
+                     sleep(10);
+                 } catch (InterruptedException ex) {
+                     Logger.getLogger(MenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                 }  
+
+            }
+         
+                    
+           
+            
+     }).start();
+    
+      
     }
 
     @FXML

@@ -14,11 +14,20 @@ import javafx.scene.media.AudioClip;
 public class RecursosGlobales {
 
     public static AudioClip music;
+
     public static boolean lluviaMeteoros = true; 
     public static double aumentoX= 3;
     public static double aumentoY= 3;
     public static long velocidadLluvia = 2;
     public static double largoMenu=790;
     public static double altoMenu=570;
+    public static double volumenMusic = 100;
+
+    public RecursosGlobales(double f) {
+    
+    
+    }
+    
+    
     
 }
