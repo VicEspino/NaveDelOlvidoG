@@ -22,7 +22,8 @@ public class RecursosGlobales {
     public static Media media; 
 
     public static MediaPlayer musiquita;
-
+    
+    public static boolean jugando = false;
     public static boolean lluviaMeteoros = true; 
     public static double aumentoX= 3;
     public static double aumentoY= 3;

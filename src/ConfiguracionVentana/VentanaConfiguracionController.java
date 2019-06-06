@@ -8,6 +8,7 @@ package ConfiguracionVentana;
 import Logica.RecursosGlobales;
 import com.jfoenix.controls.JFXSlider;
 import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -29,14 +30,14 @@ public class VentanaConfiguracionController extends AnchorPane{
 
     @FXML
     private Button btnCerrar;
-    @FXML
-    private AnchorPane AnchorPane;
     private AnchorPane fondo;
     
 
     FXMLLoader fxmlLoader;
     @FXML
     private JFXSlider sliderMusica;
+    @FXML
+    private AnchorPane raiz;
     
     public VentanaConfiguracionController(AnchorPane fondo) {
        this.fondo = fondo;
@@ -60,10 +61,32 @@ public class VentanaConfiguracionController extends AnchorPane{
 
     @FXML
     private void btnCerrar_Click(ActionEvent event) {
-        //AnchorPane p = fxmlLoader.getRoot();
-    //    p.getChildren().remove(p);
-    
-    fondo.getChildren().remove(this);
+        //ocultará el menu configuración, desplazandolo a la derecha y luego borrandolo del fondo.
+        new Thread(()->{
+            while(this.getLayoutX()<RecursosGlobales.largoMenu+10){
+                
+                Platform.runLater(()->{
+                    
+                    this.setLayoutX(this.getLayoutX()+10);
+                    
+                });
+                
+                try {
+                    sleep(10);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(VentanaConfiguracionController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+            //remueve el menu configuración, una vez que ya no está visible
+            Platform.runLater(()->{ 
+            
+                fondo.getChildren().remove(this);
+
+            });
+
+        }).start();
+        
     }
 
     

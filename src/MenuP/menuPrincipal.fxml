@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="fondo" prefHeight="570.0" prefWidth="790.0" style="-fx-background-color: #086DA0;" styleClass="mainFxmlClass" stylesheets="@menuprincipal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuP.MenuPrincipalController">
@@ -24,5 +25,6 @@
          </font>
       </Label>
       <JFXSlider fx:id="deslizadorVelocidad" layoutX="342.0" layoutY="522.0" max="20.0" min="1.0" prefHeight="14.0" prefWidth="238.0" value="5.0" />
+      <Rectangle fx:id="fondoNegro" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="579.0" layoutX="-792.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: black;" width="792.0" />
    </children>
 </AnchorPane>

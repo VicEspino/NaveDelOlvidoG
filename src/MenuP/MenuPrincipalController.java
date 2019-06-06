@@ -37,6 +37,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
@@ -64,6 +65,8 @@ public class MenuPrincipalController implements Initializable {
     Thread iniciadorLluvia;
     @FXML
     private JFXSlider deslizadorVelocidad;
+    @FXML
+    private Rectangle fondoNegro;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -85,6 +88,7 @@ public class MenuPrincipalController implements Initializable {
              while(RecursosGlobales.lluviaMeteoros){
               new MeteoroClass(fondo).start();
               new MeteoroClass(fondo).start();
+     //         new MeteoroClass(fondo).start();
                  try {
                      sleep(50);
                  } catch (InterruptedException ex) {
@@ -105,8 +109,35 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private void btnJugar_OnAction(ActionEvent event) {
       
-      
+                         
+
+       Thread parar = new Thread(()->{
+           
+           while(fondoNegro.getLayoutX()<0){
+               
+               Platform.runLater(()->{
+               
+                    fondoNegro.setLayoutX(fondoNegro.getLayoutX()+4);               
+               });
+               
+               try {
+                   sleep(1);
+               } catch (InterruptedException ex) {
+                   Logger.getLogger(MenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+               
+           }
+           RecursosGlobales.lluviaMeteoros=false;
+           //System.out.println("Hilo Muerto");
+       });
        
+        try {
+            parar.join();               
+            cambiarVentana(event,"/VentanaJuego/VentanaJuego.fxml");
+
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
       
        
          
@@ -133,7 +164,7 @@ public class MenuPrincipalController implements Initializable {
                  });
                   
                 try {
-                     sleep(10);
+                     sleep(100);
                  } catch (InterruptedException ex) {
                      Logger.getLogger(MenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
                  }  
@@ -152,6 +183,21 @@ public class MenuPrincipalController implements Initializable {
     private void btnSalir_OnAction(ActionEvent event) {
         //saldrá del del programa
         System.exit(0);
+        
+    }
+
+    private void cambiarVentana(ActionEvent event, String ventanaJuegoVentanaJuegofxml) {
+        
+        //Parent root = FXMLL
+        Stage newStage = new Stage();
+        newStage = (Stage)( ((Node) (event.getSource() ) ).getScene().getWindow() );
+        
+        try {
+            newStage.setScene(new Scene((Parent)FXMLLoader.load(getClass().getResource(ventanaJuegoVentanaJuegofxml))));
+        } catch (IOException ex) {
+            Logger.getLogger(MenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
         
     }
  

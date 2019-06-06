@@ -32,7 +32,7 @@ public class MeteoroClass extends Thread {
     Se multiplica x2, porque le estamos restanto ya la altura de la ventana, por lo tanto, en la coordenada resultante, jamás llegará en Y a la coordenada maxima,
     así que si multiplicamos x2 el rango de generacion, se cubre esa zona faltante.
     */
-        this.meteoro = new Circle( -50,-50 -RecursosGlobales.altoMenu + random.nextInt((int) (RecursosGlobales.altoMenu * 2)), 10);
+        this.meteoro = new Circle( -50,-50 -RecursosGlobales.altoMenu + random.nextInt((int) (RecursosGlobales.altoMenu * 2)), 7);
             Platform.runLater(()->{
  
           
