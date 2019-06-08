@@ -60,7 +60,7 @@ public class VentanaJuegoController implements Initializable {
             Juego.naveIzquierda= false;
         }else if(event.getCode()== KeyCode.RIGHT){
             Juego.naveDerecha = false;
-        }else if(event.getCode() == KeyCode.UP){
+        }else if(event.getCode() == KeyCode.SPACE){
             System.out.println("  dispario");
             this.juego.disparar();
         }

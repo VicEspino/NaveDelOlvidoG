@@ -164,7 +164,7 @@ public class MenuPrincipalController implements Initializable {
                  });
                   
                 try {
-                     sleep(100);
+                     sleep(4);
                  } catch (InterruptedException ex) {
                      Logger.getLogger(MenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
                  }  

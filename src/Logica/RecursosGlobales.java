@@ -18,6 +18,7 @@ public class RecursosGlobales {
     public static String path = "src/Recursos/Musica/angel.mp4";
     public static File grafic ;
     public static String rutaG;
+    public static String cancionActual = "Angel - Elefante :v";
 
     public static Media media; 
 
@@ -34,12 +35,19 @@ public class RecursosGlobales {
 
    public static void iniciarMusica(String path){
        grafic = new File(path);
+       
        rutaG = grafic.getAbsoluteFile().toString();
        media = new Media(new File(path).toURI().toString());
        
        musiquita  = new MediaPlayer(media);
        musiquita.play();
 
+   }
+   
+   public static void iniciarMusica(MusicaC cancion){
+       musiquita.stop();
+       iniciarMusica(cancion.getPaht());
+       cancionActual= cancion.getNombre();
    }
     
     
