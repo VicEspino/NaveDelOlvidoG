@@ -23,7 +23,7 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         
- 
+      
                    
         Parent root = FXMLLoader.load(getClass().getResource("/MenuP/menuPrincipal.fxml"));
         //ssaaasddssf

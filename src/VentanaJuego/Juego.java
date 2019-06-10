@@ -7,9 +7,12 @@ package VentanaJuego;
 
 import Logica.RecursosGlobales;
 import static java.lang.Thread.sleep;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
@@ -25,7 +28,12 @@ public class Juego {
     private ImageView Nave;
     private Rectangle laser;
     private Thread jugando;
+    private Thread generadorPiedrasRandom;
+    
     private AnchorPane fondoJuego;
+ 
+    private ArrayList<Rectangle> listaLasers;
+    private ArrayList<ImageView> listaPiedras;
     
     public Juego() {
         
@@ -36,14 +44,19 @@ public class Juego {
         RecursosGlobales.jugando = true;
         this.Nave = Nave;
         this.laser = laser;
-        inicializarHilo();
-        jugando.setDaemon(true);
-        jugando.start();
+        inicializarHilos();
+
         this.fondoJuego = fondoJuego;
+       
+        listaLasers = new ArrayList<>();
+        listaPiedras = new ArrayList<>();
         
+        
+    
     }
 
-    private void inicializarHilo() {
+    //inicializa los hilos del movimiento de la nave  y el que genera las piedras automaticas (hilo padre que genera hilos hijos)
+    private void inicializarHilos() {
 
         jugando = new Thread(()->{
         
@@ -75,14 +88,37 @@ public class Juego {
             
             
         });
+        
+        generadorPiedrasRandom = new Thread(()->{
+            
+            while(RecursosGlobales.jugando){
+                Platform.runLater(()->{ 
+                    generarPiedra();
+
+                });
+                try {
+                    sleep(900);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        //mover los daemon y starts al metodo de inicializarHilos
+        jugando.setDaemon(true);
+        jugando.start();
+        
+        generadorPiedrasRandom.setDaemon(true);
+        generadorPiedrasRandom.start();
+        
 
     }
-
-    void disparar() {
+    //se invocará desde afuera para hacer un disparo
+    public void disparar() {
 
         Rectangle laserNuevo = new Rectangle(laser.getWidth(), laser.getHeight(), laser.getFill());
 
-        
+        listaLasers.add(laserNuevo);
         fondoJuego.getChildren().add(laserNuevo);
         laserNuevo.setLayoutX(Nave.getLayoutX());
         laserNuevo.setLayoutY(Nave.getLayoutY());
@@ -108,17 +144,76 @@ public class Juego {
             Platform.runLater(()->{
             
                 fondoJuego.getChildren().remove(laserNuevo);                
-                
+                listaLasers.remove(laserNuevo);
             });
             
         });
         
-        hiloTemp.setDaemon(false);
+        hiloTemp.setDaemon(true);
         hiloTemp.start();
 
     }
     
+    //generará una unica piedra en la pantalla de juego, en la posicionX random
+    private void generarPiedra(){
+        ImageView ivPiedra =new ImageView("Recursos/Imagenes/piedra.png");
+        listaPiedras.add(ivPiedra);
+        fondoJuego.getChildren().add(ivPiedra);
+     
+        ivPiedra.setLayoutX( (double)(new Random().nextInt((int) RecursosGlobales.largoMenu)) );
+        ivPiedra.setLayoutY(0);
+        ivPiedra.setFitHeight(RecursosGlobales.largoMenu/8);
+        ivPiedra.setFitWidth(RecursosGlobales.largoMenu/8);
+        
+      /*  new Thread(){
+            @Override
+            public void run(){
+                
+            }
+        };
+        new Thread(
+                new Runnable() {
+            @Override
+            public void run() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        }).start();
+        */
+      Thread hiloTemp =
+        new Thread(()->{
+        
+            while(ivPiedra.getLayoutY()<500){
+                
+               Platform.runLater(()->{
+                   
+                   ivPiedra.setLayoutY(ivPiedra.getLayoutY()+5);
+                   
+               });
+                
+                try {
+                    sleep(10);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);                    
+                }
+                
+                    
+            }
+            
+            Platform.runLater(()->{
+            
+                listaPiedras.remove(ivPiedra);
+                fondoJuego.getChildren().remove(ivPiedra);
+            
+            });
+        });
+        hiloTemp.setDaemon(true);
+        hiloTemp.start();
+        
+    }
     
     
     
 }
+
+
+

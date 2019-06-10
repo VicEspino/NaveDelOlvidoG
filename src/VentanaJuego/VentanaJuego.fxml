@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane id="AnchorPane" fx:id="fondoJuego" prefHeight="789.0" prefWidth="1026.0" style="-fx-background-color: black;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VentanaJuego.VentanaJuegoController">
+<AnchorPane id="AnchorPane" fx:id="fondoJuego" prefHeight="788.0" prefWidth="942.0" style="-fx-background-color: black;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VentanaJuego.VentanaJuegoController">
     <stylesheets>
         <URL value="@ventanajuego.css" />
     </stylesheets>
    <children>
-      <ImageView fx:id="Nave" fitHeight="150.0" fitWidth="200.0" focusTraversable="true" layoutX="445.0" layoutY="638.0" onKeyPressed="#teclaPresionada" onKeyReleased="#teclaLevantada" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Nave" fitHeight="150.0" fitWidth="200.0" focusTraversable="true" layoutX="372.0" layoutY="638.0" onKeyPressed="#teclaPresionada" onKeyReleased="#teclaLevantada" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Recursos/Imagenes/nave.png" />
          </image>
