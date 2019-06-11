@@ -181,22 +181,26 @@ public class Juego {
         */
       Thread hiloTemp =
         new Thread(()->{
-        
-            while(ivPiedra.getLayoutY()<500){
+        boolean colision = false;
+            while(ivPiedra.getLayoutY()<700 && colision == false){
                 
                Platform.runLater(()->{
                    
                    ivPiedra.setLayoutY(ivPiedra.getLayoutY()+5);
                    
-               });
-                
+               });               
+               for(Rectangle recActual : listaLasers){
+                   if(ivPiedra.getBoundsInParent().intersects(recActual.getBoundsInParent())){
+                       colision = true;
+                       break;
+
+                   }
+               }               
                 try {
-                    sleep(10);
+                    sleep(12);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);                    
-                }
-                
-                    
+                }                                    
             }
             
             Platform.runLater(()->{
@@ -208,8 +212,22 @@ public class Juego {
         });
         hiloTemp.setDaemon(true);
         hiloTemp.start();
-        
-    }
+       /*
+       Thread hiloDetectorColisiones;
+       hiloDetectorColisiones = new  Thread(){
+         @Override  
+         public void run(){
+               for(Rectangle laserActual : listaLasers){
+                if(ivPiedra.getBoundsInParent().intersects(laserActual.getBoundsInParent())) 
+                    colisionActual = true;
+                    //break;
+            }
+            
+         }  
+           
+       };
+        */
+    } 
     
     
     
