@@ -19,7 +19,8 @@ public class RecursosGlobales {
     public static File grafic ;
     public static String rutaG;
     public static String cancionActual = "Angel - Elefante :v";
-
+    public static int contadorPiedrasDestruidas = 0;
+    public static int contadorDisparos = 0;
     public static Media media; 
 
     public static MediaPlayer musiquita;

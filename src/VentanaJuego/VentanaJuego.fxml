@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="fondoJuego" prefHeight="788.0" prefWidth="942.0" style="-fx-background-color: black;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VentanaJuego.VentanaJuegoController">
     <stylesheets>
@@ -17,5 +19,10 @@
          </image>
       </ImageView>
       <Rectangle fx:id="laser" arcHeight="5.0" arcWidth="5.0" fill="RED" height="51.0" layoutX="14.0" layoutY="724.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
+      <Label fx:id="lblPuntuacion" layoutX="857.0" layoutY="39.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="Consolas Italic" size="28.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -13,8 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -29,6 +31,7 @@ public class Juego {
     private Rectangle laser;
     private Thread jugando;
     private Thread generadorPiedrasRandom;
+    private Label contador;
     
     private AnchorPane fondoJuego;
  
@@ -40,14 +43,13 @@ public class Juego {
         
     }
 
-    Juego(ImageView Nave, Rectangle laser,AnchorPane fondoJuego) {
+    Juego(ImageView Nave, Rectangle laser,AnchorPane fondoJuego,Label contador) {
         RecursosGlobales.jugando = true;
         this.Nave = Nave;
         this.laser = laser;
         inicializarHilos();
-
-        this.fondoJuego = fondoJuego;
-       
+        this.contador = contador;
+        this.fondoJuego = fondoJuego;        
         listaLasers = new ArrayList<>();
         listaPiedras = new ArrayList<>();
         
@@ -115,6 +117,8 @@ public class Juego {
     }
     //se invocará desde afuera para hacer un disparo
     public void disparar() {
+        AudioClip music = new AudioClip( this.getClass().getResource("/Recursos/Musica/laser.mp3").toString() );
+        music.play();
 
         Rectangle laserNuevo = new Rectangle(laser.getWidth(), laser.getHeight(), laser.getFill());
 
@@ -164,21 +168,7 @@ public class Juego {
         ivPiedra.setLayoutY(0);
         ivPiedra.setFitHeight(RecursosGlobales.largoMenu/8);
         ivPiedra.setFitWidth(RecursosGlobales.largoMenu/8);
-        
-      /*  new Thread(){
-            @Override
-            public void run(){
-                
-            }
-        };
-        new Thread(
-                new Runnable() {
-            @Override
-            public void run() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        }).start();
-        */
+
       Thread hiloTemp =
         new Thread(()->{
         boolean colision = false;
@@ -186,18 +176,24 @@ public class Juego {
                 
                Platform.runLater(()->{
                    
-                   ivPiedra.setLayoutY(ivPiedra.getLayoutY()+5);
+                   ivPiedra.setLayoutY(ivPiedra.getLayoutY()+6);
                    
                });               
-               for(Rectangle recActual : listaLasers){
-                   if(ivPiedra.getBoundsInParent().intersects(recActual.getBoundsInParent())){
+               for(Rectangle laserActual : listaLasers){
+                   if(ivPiedra.getBoundsInParent().intersects(laserActual.getBoundsInParent())){
                        colision = true;
+                       Platform.runLater(()->{
+                           //RecursosGlobales.contadorPiedrasDestruidas++;
+                           this.contador.setText(++RecursosGlobales.contadorPiedrasDestruidas +"");
+                           fondoJuego.getChildren().remove(laserActual);
+                           listaLasers.remove(laserActual);
+                       });
                        break;
 
                    }
                }               
                 try {
-                    sleep(12);
+                    sleep(10);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);                    
                 }                                    
@@ -212,21 +208,7 @@ public class Juego {
         });
         hiloTemp.setDaemon(true);
         hiloTemp.start();
-       /*
-       Thread hiloDetectorColisiones;
-       hiloDetectorColisiones = new  Thread(){
-         @Override  
-         public void run(){
-               for(Rectangle laserActual : listaLasers){
-                if(ivPiedra.getBoundsInParent().intersects(laserActual.getBoundsInParent())) 
-                    colisionActual = true;
-                    //break;
-            }
-            
-         }  
-           
-       };
-        */
+    
     } 
     
     

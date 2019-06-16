@@ -5,10 +5,12 @@
  */
 package VentanaJuego;
 
+import Logica.RecursosGlobales;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -29,14 +31,17 @@ public class VentanaJuegoController implements Initializable {
     Juego juego;
     @FXML
     private AnchorPane fondoJuego;
+    @FXML
+    private Label lblPuntuacion;
     /**
      * Initializes the controller class.
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        juego = new Juego(Nave,laser,fondoJuego);
+        juego = new Juego(Nave,laser,fondoJuego,lblPuntuacion);
     }    
 
     @FXML
@@ -62,14 +67,15 @@ public class VentanaJuegoController implements Initializable {
             Juego.naveDerecha = false;
         }else if(event.getCode() == KeyCode.SPACE){
             System.out.println("  dispario");
+           
             this.juego.disparar();
         }
 
     }
 
     private void disparar() {
-
-        this.juego.disparar();
+       RecursosGlobales.contadorDisparos++;
+       this.juego.disparar();
     }
     
     
