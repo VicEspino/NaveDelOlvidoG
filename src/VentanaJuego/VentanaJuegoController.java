@@ -67,17 +67,13 @@ public class VentanaJuegoController implements Initializable {
             Juego.naveDerecha = false;
         }else if(event.getCode() == KeyCode.SPACE){
             System.out.println("  dispario");
-           
+           RecursosGlobales.contadorDisparos++;
             this.juego.disparar();
         }
 
     }
 
-    private void disparar() {
-       RecursosGlobales.contadorDisparos++;
-       this.juego.disparar();
-    }
-    
+
     
     
     
