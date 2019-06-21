@@ -76,8 +76,8 @@ public class VentanaConfiguracionController extends AnchorPane{
 
         };
         cbCancionesLista.setCellFactory(factory);
-        cbCancionesLista.getItems().add(new MusicaC("src/Recursos/Musica/Teminite-Ascent2.mp3", "Ascent"));
-        cbCancionesLista.getItems().add(new MusicaC("src/Recursos/Musica/angel.mp4", "Angel - Elefante :v"));
+        cbCancionesLista.getItems().add(new MusicaC(getClass().getResource("/Recursos/Musica/Teminite-Ascent2.mp3").toString(), "Ascent"));
+        cbCancionesLista.getItems().add(new MusicaC(getClass().getResource("/Recursos/Musica/angel.mp4").toString(), "Angel - Elefante :v"));
         //cbCancionesLista.setItems(value);
        // cbCancionesLista.getSelectionModel().select(0);
         //cbCancionesLista.selectionModelProperty().setValue( cbCancionesLista.getSelectionModel() );

@@ -35,7 +35,8 @@ public class main extends Application {
         primaryStage.getIcons().add(new Image("/Recursos/Imagenes/cabeza_icono.png")); 
         primaryStage.setTitle("La Nave del Olvido");
    
-        RecursosGlobales.iniciarMusica("src/Recursos/Musica/angel.mp4");
+        //RecursosGlobales.iniciarMusica("src/Recursos/Musica/angel.mp4");
+        RecursosGlobales.iniciarMusica(getClass().getResource("/Recursos/Musica/angel.mp4").toString());
 
     }
     

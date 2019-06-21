@@ -38,7 +38,8 @@ public class RecursosGlobales {
        grafic = new File(path);
        
        rutaG = grafic.getAbsoluteFile().toString();
-       media = new Media(new File(path).toURI().toString());
+       //media = new Media(new File(path).toURI().toString());
+       media = new Media(path);
        
        musiquita  = new MediaPlayer(media);
        musiquita.play();
