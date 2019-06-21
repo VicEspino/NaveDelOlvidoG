@@ -211,7 +211,17 @@ public class Juego {
     
     } 
     
+    public void pausarJuego(){
+        try {
+            jugando.wait();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
+    public void renaudarJuego(){
+        
+    }
     
 }
 

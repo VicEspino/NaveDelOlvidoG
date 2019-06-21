@@ -8,6 +8,7 @@ package MenuP;
 import ConfiguracionVentana.VentanaConfiguracionController;
 import Logica.MeteoroClass;
 import Logica.RecursosGlobales;
+import VentanaJuego.VentanaJuegoController;
 import com.jfoenix.controls.JFXSlider;
 import java.io.File;
 import java.io.IOException;
@@ -67,18 +68,20 @@ public class MenuPrincipalController implements Initializable {
     private JFXSlider deslizadorVelocidad;
     @FXML
     private Rectangle fondoNegro;
+    VentanaJuegoController ventanaJuego;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//       RecursosGlobales.music 
-   
-       
+//       RecursosGlobales.music   
+
+        RecursosGlobales.lluviaMeteoros = true;
         deslizadorVelocidad.valueProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    RecursosGlobales.velocidadLluvia = (long) this.deslizadorVelocidad.getValue();
-                    
+          (observable, oldValue, newValue) -> {
+              RecursosGlobales.velocidadLluvia = (long) this.deslizadorVelocidad.getValue();
+
         });
-      iniciadorLluvia = new Thread(){
+        iniciadorLluvia = new Thread(){
             
          //con clase anonimaa tira excepcion
            
@@ -101,66 +104,35 @@ public class MenuPrincipalController implements Initializable {
        };
       iniciadorLluvia.setDaemon(true);
       iniciadorLluvia.start();
-      
-      RecursosGlobales.iniciarMusica("src/Recursos/Musica/angel.mp4");
+
         
     }    
+    
+    
 
     @FXML
     private void btnJugar_OnAction(ActionEvent event) {
       
-                         
-
-       Thread parar = new Thread(()->{
-           
-           while(fondoNegro.getLayoutX()<0){
-               
-               Platform.runLater(()->{
-               
-                    fondoNegro.setLayoutX(fondoNegro.getLayoutX()+4);               
-               });
-               
-               try {
-                   sleep(1);
-               } catch (InterruptedException ex) {
-                   Logger.getLogger(MenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-               }
-               
-           }
-           RecursosGlobales.lluviaMeteoros=false;
-           //System.out.println("Hilo Muerto");
-       });
-       
-        try {
-            parar.join();               
-            cambiarVentana(event,"/VentanaJuego/VentanaJuego.fxml");
-
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
-       
-         
+        ventanaJuego = new VentanaJuegoController();
+        Stage ventana = (Stage)((Node)event.getSource()).getScene().getWindow();
+        ventana.setScene(new Scene(ventanaJuego));                                      
+        RecursosGlobales.lluviaMeteoros=false;
+                //ventanaJuego.setLayoutX(ventanaJuego.getLayoutX()-80);                            
     }
 
     @FXML
     private void btnOpciones_OnAction(ActionEvent event) throws IOException {
          Stage s = ( (Stage) ((Node)event.getSource()).getScene().getWindow() );
 
-               VentanaConfiguracionController ventana = new VentanaConfiguracionController(fondo);
-        
+               VentanaConfiguracionController ventana = new VentanaConfiguracionController(fondo);        
                 ventana.setLayoutX(RecursosGlobales.largoMenu-10);
                 ventana.setLayoutY(RecursosGlobales.altoMenu/11);
                 fondo.getChildren().add(ventana);
      new Thread(()->{                  
              while(ventana.getLayoutX()>450){
                   Platform.runLater(()->{
-              
-                      
+                                    
                     ventana.setLayoutX(ventana.getLayoutX()-10);
-
-
-
                  });
                   
                 try {
@@ -170,10 +142,7 @@ public class MenuPrincipalController implements Initializable {
                  }  
 
             }
-         
-                    
-           
-            
+
      }).start();
     
       

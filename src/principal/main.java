@@ -5,6 +5,7 @@
  */
 package principal;
 
+import Logica.RecursosGlobales;
 import java.io.File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +31,7 @@ public class main extends Application {
         primaryStage.setScene(new Scene(root,790,570));
         
         primaryStage.show();
+        RecursosGlobales.iniciarMusica("src/Recursos/Musica/angel.mp4");
 
     }
     
