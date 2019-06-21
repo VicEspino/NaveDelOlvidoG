@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -31,6 +32,9 @@ public class main extends Application {
         primaryStage.setScene(new Scene(root,790,570));
         
         primaryStage.show();
+        primaryStage.getIcons().add(new Image("/Recursos/Imagenes/cabeza_icono.png")); 
+        primaryStage.setTitle("La Nave del Olvido");
+   
         RecursosGlobales.iniciarMusica("src/Recursos/Musica/angel.mp4");
 
     }
