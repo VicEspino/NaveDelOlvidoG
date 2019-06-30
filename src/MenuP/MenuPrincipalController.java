@@ -7,6 +7,7 @@ package MenuP;
 
 import ConfiguracionVentana.VentanaConfiguracionController;
 import Logica.MeteoroClass;
+import Logica.MusicLoader;
 import Logica.RecursosGlobales;
 import VentanaJuego.VentanaJuegoController;
 import com.jfoenix.controls.JFXSlider;
@@ -104,7 +105,7 @@ public class MenuPrincipalController implements Initializable {
        };
       iniciadorLluvia.setDaemon(true);
       iniciadorLluvia.start();
-
+      RecursosGlobales.ml = new MusicLoader();
         
     }    
     

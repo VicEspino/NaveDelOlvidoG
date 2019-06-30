@@ -6,7 +6,7 @@
 package Logica;
 
 /**
- *
+ *Clase musica, cada instancia de esta clase, contendrá los datos de una cancion, 
  * @author VAPESIN
  */
 public class MusicaC {

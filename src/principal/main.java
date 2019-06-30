@@ -5,6 +5,7 @@
  */
 package principal;
 
+import Logica.MusicLoader;
 import Logica.RecursosGlobales;
 import java.io.File;
 import javafx.application.Application;
@@ -37,7 +38,7 @@ public class main extends Application {
    
         //RecursosGlobales.iniciarMusica("src/Recursos/Musica/angel.mp4");
         RecursosGlobales.iniciarMusica(getClass().getResource("/Recursos/Musica/angel.mp4").toString());
-
+        
     }
     
 }

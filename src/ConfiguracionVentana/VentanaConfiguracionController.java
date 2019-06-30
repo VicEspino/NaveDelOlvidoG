@@ -5,26 +5,26 @@
  */
 package ConfiguracionVentana;
 
+
 import Logica.MusicaC;
 import Logica.RecursosGlobales;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 
 /**
@@ -51,7 +51,7 @@ public class VentanaConfiguracionController extends AnchorPane{
     
     public VentanaConfiguracionController(AnchorPane fondo) {
        this.fondo = fondo;
-       
+       //carga el controlador y la vista
         try {
             fxmlLoader= new FXMLLoader(
                 getClass().getResource("VentanaConfiguracion.fxml"));
@@ -61,13 +61,14 @@ public class VentanaConfiguracionController extends AnchorPane{
         } catch (IOException ex) {
             Logger.getLogger(VentanaConfiguracionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        //añade listener para el slider, y modificar el volumen
          sliderMusica.valueProperty().addListener(
                (observable, oldValue, newValue) -> {
                   
                    RecursosGlobales.musiquita.volumeProperty().set(newValue.doubleValue()/100);
        } );
 
+         //establece la lista para el combobox (creo, no me acuerdo xd )
         Callback<ListView<MusicaC>, ListCell<MusicaC>> factory = lv -> new ListCell<MusicaC>() {
 
             @Override
@@ -77,9 +78,13 @@ public class VentanaConfiguracionController extends AnchorPane{
             }
 
         };
+        //agrega la lista de canciones al combobox
         cbCancionesLista.setCellFactory(factory);
-        cbCancionesLista.getItems().add(new MusicaC(getClass().getResource("/Recursos/Musica/Teminite-Ascent2.mp3").toString(), "Ascent"));
-        cbCancionesLista.getItems().add(new MusicaC(getClass().getResource("/Recursos/Musica/angel.mp4").toString(), "Angel - Elefante :v"));
+      //  cbCancionesLista.getItems().add(new MusicaC(getClass().getResource("/Recursos/Musica/Teminite-Ascent2.mp3").toString(), "Ascent"));
+        //cbCancionesLista.getItems().add(new MusicaC(getClass().getResource("/Recursos/Musica/angel.mp4").toString(), "Angel - Elefante :v"));
+
+        cbCancionesLista.getItems().addAll(RecursosGlobales.ml.getListaMusicaDirectorios());
+        
         //cbCancionesLista.setItems(value);
        // cbCancionesLista.getSelectionModel().select(0);
         //cbCancionesLista.selectionModelProperty().setValue( cbCancionesLista.getSelectionModel() );
@@ -129,6 +134,10 @@ public class VentanaConfiguracionController extends AnchorPane{
 
     @FXML
     private void btnAnadirCanciones_Click(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Selecciona la(s) canción(es) a agregar... ");
+        //fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
+        fileChooser.showOpenMultipleDialog( ((Node)event.getSource()).getScene().getWindow() );
     }
 
     

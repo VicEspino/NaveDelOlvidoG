@@ -33,7 +33,12 @@ public class RecursosGlobales {
     public static double largoMenu=790;
     public static double altoMenu=570;
     public static double volumenMusic = 100;
+    //cargará la lista de canciones
+    //se inicializará en main o en menu principal
+    public static MusicLoader ml;
 
+    
+    
    public static void iniciarMusica(String path){
        grafic = new File(path);
        
@@ -43,6 +48,7 @@ public class RecursosGlobales {
        
        musiquita  = new MediaPlayer(media);
        musiquita.play();
+       musiquita.volumeProperty().set(0.3);
 
    }
    
