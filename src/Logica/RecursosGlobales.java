@@ -29,7 +29,11 @@ public class RecursosGlobales {
     public static boolean lluviaMeteoros = true; 
     public static double aumentoX= 3;
     public static double aumentoY= 3;
+    //el sleep de cada particula
     public static long velocidadLluvia = 2;
+    //cada cuando ms se generan 2 pelotas (sleep)
+    public static long velocidadGeneracionLluvia = 50;
+    
     public static double largoMenu=790;
     public static double altoMenu=570;
     public static double volumenMusic = 100;
@@ -42,7 +46,9 @@ public class RecursosGlobales {
    public static void iniciarMusica(String path){
        grafic = new File(path);
        
-       rutaG = grafic.getAbsoluteFile().toString();
+       //rutaG = grafic.getAbsoluteFile().toString();
+      // rutaG = grafic.getAbsolutePath().toString();
+    
        //media = new Media(new File(path).toURI().toString());
        media = new Media(path);
        

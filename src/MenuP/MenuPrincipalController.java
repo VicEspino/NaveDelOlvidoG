@@ -27,17 +27,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.input.SwipeEvent;
-import javafx.scene.input.TouchEvent;
-import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -80,7 +70,7 @@ public class MenuPrincipalController implements Initializable {
         deslizadorVelocidad.valueProperty().addListener(
           (observable, oldValue, newValue) -> {
               RecursosGlobales.velocidadLluvia = (long) this.deslizadorVelocidad.getValue();
-
+              RecursosGlobales.velocidadGeneracionLluvia = (long) (5.78*this.deslizadorVelocidad.getValue())+44;
         });
         iniciadorLluvia = new Thread(){
             
@@ -94,7 +84,8 @@ public class MenuPrincipalController implements Initializable {
               new MeteoroClass(fondo).start();
      //         new MeteoroClass(fondo).start();
                  try {
-                     sleep(50);
+                     //sleep(RecursosGlobales.velocidadLluvia);
+                     sleep(RecursosGlobales.velocidadGeneracionLluvia);
                  } catch (InterruptedException ex) {
                      Logger.getLogger(MenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
                  }

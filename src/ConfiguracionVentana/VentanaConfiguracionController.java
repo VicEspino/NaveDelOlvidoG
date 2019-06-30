@@ -137,7 +137,14 @@ public class VentanaConfiguracionController extends AnchorPane{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecciona la(s) canción(es) a agregar... ");
         //fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
-        fileChooser.showOpenMultipleDialog( ((Node)event.getSource()).getScene().getWindow() );
+       // new Thread( ()->{
+         //   Platform.runLater(()->{
+         RecursosGlobales.velocidadGeneracionLluvia = 150;
+         RecursosGlobales.velocidadLluvia = 15;
+        RecursosGlobales.ml.anadirNuevasRutas( fileChooser.showOpenMultipleDialog( ((Node)event.getSource()).getScene().getWindow() ) ) ;
+           // });
+                    
+        //}).start();
     }
 
     

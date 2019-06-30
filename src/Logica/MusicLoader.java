@@ -73,6 +73,20 @@ public class MusicLoader {
         return listaMusicaDirectorios;
     }
     
-    
+
+    public boolean anadirNuevasRutas(List<File> nuevosRegistros) {
+        
+
+        
+        if(nuevosRegistros==null){
+            return false;
+        }else{
+            
+            for(File elemento: nuevosRegistros){
+                this.listaMusicaDirectorios.add(new MusicaC(elemento.getAbsolutePath(), elemento.getName()));
+            }
+            return true;
+        }
+    }
     
 }
