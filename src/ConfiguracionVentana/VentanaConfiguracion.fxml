@@ -21,6 +21,7 @@
             <JFXSlider fx:id="sliderMusica" layoutX="14.0" layoutY="73.0" min="1.0" />
             <JFXComboBox fx:id="cbCancionesLista" focusColor="#378043" layoutX="16.0" layoutY="218.0" onAction="#clickCancion" prefHeight="25.0" prefWidth="140.0" promptText="selecciona" unFocusColor="#378043" />
             <Label layoutX="18.0" layoutY="187.0" prefHeight="17.0" prefWidth="109.0" text="Canción" textFill="WHITE" />
+            <Button fx:id="btnAnadirCanciones" layoutX="187.0" layoutY="214.0" mnemonicParsing="false" onAction="#btnAnadirCanciones_Click" text="+" />
          </children>
       </AnchorPane>
    </children>

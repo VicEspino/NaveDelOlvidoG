@@ -46,6 +46,8 @@ public class VentanaConfiguracionController extends AnchorPane{
     private AnchorPane raiz;
     @FXML
     private JFXComboBox<MusicaC> cbCancionesLista;
+    @FXML
+    private Button btnAnadirCanciones;
     
     public VentanaConfiguracionController(AnchorPane fondo) {
        this.fondo = fondo;
@@ -123,6 +125,10 @@ public class VentanaConfiguracionController extends AnchorPane{
         RecursosGlobales.iniciarMusica(musi);
 
         
+    }
+
+    @FXML
+    private void btnAnadirCanciones_Click(ActionEvent event) {
     }
 
     
