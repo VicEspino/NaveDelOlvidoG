@@ -31,8 +31,8 @@ public class MusicLoader {
     public MusicLoader() {
         
         listaMusicaDirectorios = new ArrayList<>();
-        listaMusicaDirectorios.add(new MusicaC(getClass().getResource("/Recursos/Musica/Teminite-Ascent2.mp3").toString(), "Ascent"));
-        listaMusicaDirectorios.add(new MusicaC(getClass().getResource("/Recursos/Musica/angel.mp4").toString(), "Angel - Elefante :v"));
+        listaMusicaDirectorios.add(new MusicaC(getClass().getResource("/Recursos/Musica/Teminite-Ascent2.mp3").toString(), "Ascent",true));
+        listaMusicaDirectorios.add(new MusicaC(getClass().getResource("/Recursos/Musica/angel.mp4").toString(), "Angel - Elefante :v",true));
         
     }
     //comprobará la existencia del archivo de registros
@@ -57,6 +57,7 @@ public class MusicLoader {
             a.close();
         }
         catch(FileNotFoundException FE){
+//implementar ventanas de error modales
             System.out.println("erros escrbiir archivo");
         }
         catch(IOException IOe){
@@ -83,7 +84,7 @@ public class MusicLoader {
         }else{
             
             for(File elemento: nuevosRegistros){
-                this.listaMusicaDirectorios.add(new MusicaC(elemento.getAbsolutePath(), elemento.getName()));
+                this.listaMusicaDirectorios.add(new MusicaC(elemento.getAbsolutePath(), elemento.getName(),false));
             }
             return true;
         }

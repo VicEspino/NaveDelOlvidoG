@@ -6,6 +6,8 @@
 package Logica;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URL;
 import javafx.scene.media.Media;
  import javafx.scene.media.MediaPlayer;
 
@@ -42,7 +44,7 @@ public class RecursosGlobales {
     public static MusicLoader ml;
 
     
-    
+    //por si se manda la ruta
    public static void iniciarMusica(String path){
        grafic = new File(path);
        
@@ -54,14 +56,38 @@ public class RecursosGlobales {
        
        musiquita  = new MediaPlayer(media);
        musiquita.play();
-       musiquita.volumeProperty().set(0.3);
+       musiquita.volumeProperty().set(0.4);
 
    }
-   
+   //cuando se manda una instancia
    public static void iniciarMusica(MusicaC cancion){
-       musiquita.stop();
-       iniciarMusica(cancion.getPaht());
-       cancionActual= cancion.getNombre();
+        musiquita.stop();
+        RecursosGlobales.cancionActual = cancion.getNombre();
+        
+        if( cancion.isRecursoLocal()){
+            iniciarMusica(cancion.getPaht());
+            return;
+        }
+       try{
+           //si no puede iniciar la instancia, entonces la cancion se trata de una de las que ya tenemos por defecto
+           //por lo tanto pasa al catch
+
+    //        System.out.println(cancion.getPaht());
+      //      System.out.println(new File(cancion.getPaht()).toURI().toString());
+                //estas 2 funcionan también
+                // media = new Media( new File(cancion.getPaht()).toURI().toURL().toExternalForm());
+                // media = new Media( new File(cancion.getPaht()).toURI().toURL().toString());
+            media = new Media(new File(cancion.getPaht()).toURI().toString());
+            musiquita = new MediaPlayer( media );
+            musiquita.play();
+            musiquita.volumeProperty().set(0.4);
+
+       }catch(Exception ex){
+          //iniciarMusica(cancion.getPaht());
+            // cancionActual= cancion.getNombre();
+            System.out.println("    Error al cargar el archivo");
+       }
+       
    }
     
     

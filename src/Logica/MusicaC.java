@@ -13,10 +13,12 @@ public class MusicaC {
     
     private String paht;
     private String nombre;
-
-    public MusicaC(String paht, String nombre) {
+    private boolean recursoLocal;
+    
+    public MusicaC(String paht, String nombre , boolean recursoLocal) {
         this.paht = paht;
         this.nombre = nombre;
+        this.recursoLocal = recursoLocal;
     }
 
     public String getNombre() {
@@ -32,4 +34,7 @@ public class MusicaC {
         return paht;
     }
     
+    public boolean isRecursoLocal(){
+        return recursoLocal;
+    }
 }

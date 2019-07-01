@@ -12,10 +12,12 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSlider;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
+import java.util.ArrayList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -126,8 +128,9 @@ public class VentanaConfiguracionController extends AnchorPane{
         
         JFXComboBox a = ((JFXComboBox)event.getSource());
         MusicaC musi = (MusicaC)a.getSelectionModel().getSelectedItem();
-
-        RecursosGlobales.iniciarMusica(musi);
+        
+        if(musi!=null)
+            RecursosGlobales.iniciarMusica(musi);
 
         
     }
@@ -136,6 +139,11 @@ public class VentanaConfiguracionController extends AnchorPane{
     private void btnAnadirCanciones_Click(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecciona la(s) canción(es) a agregar... ");
+        //si se pone solo uno, solo filtrará ese
+      //  fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3 FILES xd", "*.mp3"));
+      
+      //si se ponen 2 o más en el extension filter, agrupará los que contengan esas extensiones
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Musica o Video xd", "*.mp4","*.mp3"));
         //fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
        // new Thread( ()->{
          //   Platform.runLater(()->{
@@ -143,8 +151,9 @@ public class VentanaConfiguracionController extends AnchorPane{
          RecursosGlobales.velocidadLluvia = 15;
         RecursosGlobales.ml.anadirNuevasRutas( fileChooser.showOpenMultipleDialog( ((Node)event.getSource()).getScene().getWindow() ) ) ;
            // });
-                    
-        //}).start();
+           cbCancionesLista.getItems().clear();
+        cbCancionesLista.getItems().addAll(RecursosGlobales.ml.getListaMusicaDirectorios());
+       //}).start();
     }
 
     
